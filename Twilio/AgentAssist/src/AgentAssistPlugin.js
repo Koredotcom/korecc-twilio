@@ -168,7 +168,6 @@ export default class AgentAssistPlugin extends FlexPlugin {
     console.log(funcResponse.data);
     console.log("----------------change----------------------------");
     // flex.AgentDesktopView.defaultProps.showPanel2  = false;
-    // https://dev-agentassist.kore.ai/koreagentassist-sdk/UI/agentassist-iframe.html
 
     // When new task is accepted
     // changeURL(iframeURL);
@@ -278,7 +277,7 @@ export default class AgentAssistPlugin extends FlexPlugin {
         message: message,
         customData:{
           "name":"First Name",
-          "email": "sandeep.yadav@kore.com",
+          "email": "someone@email.com",
           "permissions":["admin", "superAdmin", "developer", "agent"]
         }
       }

@@ -1,0 +1,106 @@
+{
+  "id": "e7f8949f0cf44fd99537269940cf32f3",
+  "account_id": "6471145ddb28af66d74fee31",
+  "user_id": "649c16a483084e3a99db8f1c",
+  "name": "Kore.ai AgentAssist Flow",
+  "description": "",
+  "trigger_type": "voice_inbound",
+  "status": "draft",
+  "version": 1,
+  "created_at": "2023-11-23T10:26:01.053561Z",
+  "updated_at": "2023-11-23T10:26:01.754262Z",
+  "valid": true,
+  "validation_status": "valid",
+  "initial_step_id": "0011aaa9-b282-4c46-9063-d4e4602ea79a",
+  "group_id": "3bb0fca9899643d28216e42b9050660a",
+  "pre_conditions": {},
+  "steps": [
+    {
+      "id": "0011aaa9-b282-4c46-9063-d4e4602ea79a",
+      "name": "Initial step",
+      "component": { "name": "inbound_voice-ZjE1ZjM0MG", "version": "1.3.x" },
+      "properties": {},
+      "exits": [
+        {
+          "_key": "4504562e-0887-4012-a179-9531eb675a0d",
+          "name": "ok",
+          "transition": "49b8e2f7-1ec6-47c8-8df6-6843475bf2d3"
+        }
+      ],
+      "context_mappings": {},
+      "created_at": "2023-07-05T10:35:06.887Z"
+    },
+    {
+      "id": "17a96f66-ee9c-4b34-a5bc-467fc3716ca8",
+      "name": "end",
+      "component": { "name": "hangup_call-OTE5ZmM0NW", "version": "1.0.x" },
+      "properties": {},
+      "exits": [],
+      "context_mappings": {},
+      "created_at": "2023-07-05T10:35:40.571Z"
+    },
+    {
+      "id": "f4e01fe9-915a-4f67-bc71-339e12f5f61c",
+      "name": "Agent Ring",
+      "component": {
+        "name": "assignment_and_dial-M2JhZTViYT",
+        "version": "3.23.x"
+      },
+      "properties": {
+        "priority": { "priorities_list": 10 },
+        "time_limit": { "time": 200, "waiting_music": {} },
+        "users_to_ring": {
+          "exhaust": true,
+          "forced_queueing": false,
+          "number_of_users": 1
+        },
+        "waiting_message": {},
+        "assignment_parameters": {
+          "ring_groups": { "ring_groups_list": ["agents"] }
+        }
+      },
+      "exits": [
+        {
+          "_key": "98c63804-7fff-4583-8a0f-f1cee96917c1",
+          "name": "call_finished",
+          "transition": "17a96f66-ee9c-4b34-a5bc-467fc3716ca8"
+        },
+        {
+          "_key": "b6ffcbf2-6d9d-4e15-83c9-aeead7509d44",
+          "name": "call_no_answer",
+          "transition": "17a96f66-ee9c-4b34-a5bc-467fc3716ca8"
+        },
+        {
+          "_key": "4736cad0-f23b-4d45-aab4-025d587768da",
+          "name": "time_limit_reached",
+          "transition": "17a96f66-ee9c-4b34-a5bc-467fc3716ca8"
+        },
+        {
+          "_key": "21f74bda-2689-43c5-bd24-7b1cd18d7666",
+          "name": "no_match",
+          "transition": "17a96f66-ee9c-4b34-a5bc-467fc3716ca8"
+        }
+      ],
+      "context_mappings": {},
+      "created_at": "2023-10-16T10:45:31.851Z"
+    },
+    {
+      "id": "49b8e2f7-1ec6-47c8-8df6-6843475bf2d3",
+      "name": "Kore VG Asterisk",
+      "component": { "name": "ai_voice_stream_start", "version": "0.2.x" },
+      "properties": {
+        "url": "<Kore.ai Base WS URl>/audiosocket/talkdesk?sipuri=<Kore.ai SIP URI>&token=<JWT for Voice Stream>&botId=<Kore.ai Bot ID>&accountId=<Kore.ai Account ID>&agentassist=true"
+      },
+      "exits": [
+        {
+          "_key": "cf8966fb-285c-4d98-b630-777a972b67dd",
+          "name": "success",
+          "transition": "f4e01fe9-915a-4f67-bc71-339e12f5f61c"
+        }
+      ],
+      "context_mappings": {},
+      "created_at": "2023-10-16T11:45:09Z"
+    }
+  ],
+  "model": {}
+}

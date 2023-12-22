@@ -1,0 +1,262 @@
+{
+  "id": "c4ebb002-a7f8-4272-816a-838f8729cf58",
+  "name": "KAA Talkdesk Demo",
+  "type": "WORKSPACE_DESIGNER_CARDS",
+  "publish_state": "DEPLOYED",
+  "last_updated": "2023-12-05T07:50:13.579678Z",
+  "last_published": "2023-12-05T07:50:15.598636Z",
+  "content": [
+    {
+      "id": "71e47bc1-9eb8-4dac-b8df-4f8128c94ba0",
+      "name": "",
+      "creation_index": 1,
+      "nodes": [
+        {
+          "id": "8acd67f1-2c27-4fa0-92d3-d0f4fbbe4a42",
+          "type": "card-trigger",
+          "namespace": "WORKSPACE_DESIGNER_CARDS",
+          "position": { "x": -775, "y": 110 },
+          "data": {
+            "configuration": {
+              "events": [
+                {
+                  "id": "3c231d47-73b8-404d-ad34-66fdbc923e75",
+                  "namespace": "context",
+                  "type": "variables_change",
+                  "properties": {
+                    "variables": [
+                      { "id": "80dfab71-0264-4a67-a460-a5150d8f744c" },
+                      { "id": "c09d303b-4fb6-4038-806e-317e0938669f" },
+                      { "id": "4d4c7836-575c-40ad-9a23-14c1773c9afe" },
+                      { "id": "a25b6615-fc4b-4cb8-aefb-b3b5170083b6" },
+                      { "id": "390fec3c-1001-4c64-9c8a-e47b75090104" }
+                    ]
+                  },
+                  "exit_handle": "3c231d47-73b8-404d-ad34-66fdbc923e75-exit"
+                }
+              ]
+            }
+          },
+          "name": "Card Re-render Trigger"
+        },
+        {
+          "id": "f03bde01-62ec-4c34-a789-cf6bbdaa03cc",
+          "type": "render-view",
+          "namespace": "workspace_designer_cards",
+          "position": { "x": -360, "y": 105 },
+          "data": {
+            "configuration": {
+              "code": "{\n  (() => {\n    (async () => {\n      var conversation_id = Context.getVariable(\"interaction_id\");\n      if (!conversation_id) {\n        console.log(\"TalkdeskCardLog>.>.> No Active Conversation\");\n        actions.goToExit(\"no-active-conversation\");\n        //return <h3>No Active Conversation Detected</h3>;\n        return 1;\n      }\n\n      const channel = Context.getVariable(\"channel\")\n      console.log(\"TalkdeskCardLog>.>.> Channel\",channel);\n      console.log(\"TalkdeskCardLog conversation_id>.>.>\", conversation_id);\n      console.log(\n        \"TalkdeskCardLog contact_id>.>.>\",\n        Context.getVariable(\"contact_id\")\n      );\n      console.log(\n        \"TalkdeskCardLog active_user_name>.>.>\",\n        Context.getVariable(\"active_user_name\")\n      );\n\n      const isScriptLoaded = (url) => {\n        var scripts = document.getElementsByTagName(\"script\");\n        for (var i = scripts.length; i--; ) {\n          if (scripts[i].src == url) return true;\n        }\n        return false;\n      };\n      const fullLoader = async () => {\n        const sc1 =\n            \"https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js\",\n          sc2 =\n            \"https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/enc-base64.min.js\",\n          sc3 =\n            \"https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/enc-base64url.min.js\";\n        if (!isScriptLoaded(sc1))\n          await loadScript(\n            sc1,\n            \"sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==\"\n          );\n        if (!isScriptLoaded(sc2))\n          await loadScript(\n            sc2,\n            \"sha512-IKpu1GFk/bQ+2fOc4sXuA6lm7Rct4P7611iDBxY9LReOZ2PpwoDWWqj6GSYejUce1FLxo/d4lxAnKqGWJuBw7g==\"\n          );\n        if (!isScriptLoaded(sc3))\n          await loadScript(\n            sc3,\n            \"sha512-VeI4k/L6vcZnMU9G0mi4CyV635/jYHShyT8zsMjNvrNuroiuhUN87xrjua/RRVjRzLXb3pLBJa6PNMMEk9zI1w==\"\n          );\n      };\n\n      const loadScript = (\n        FILE_URL,\n        integrity,\n        async = true,\n        type = \"text/javascript\"\n      ) => {\n        return new Promise((resolve, reject) => {\n          try {\n            const scriptEle = document.createElement(\"script\");\n            scriptEle.type = type;\n            scriptEle.async = async;\n            scriptEle.integrity = integrity;\n            scriptEle.src = FILE_URL;\n            scriptEle.crossOrigin = \"anonymous\";\n\n            scriptEle.addEventListener(\"load\", (ev) => {\n              console.log(\n                `Successfully Loaded script ${FILE_URL.substring(\n                  FILE_URL.lastIndexOf(\"/\") + 1,\n                  FILE_URL.length\n                )}`\n              );\n              resolve({ status: true });\n            });\n\n            scriptEle.addEventListener(\"error\", (ev) => {\n              reject({\n                status: false,\n                message: `Failed to load the script ${FILE_URL.substring(\n                  FILE_URL.lastIndexOf(\"/\") + 1,\n                  FILE_URL.length\n                )}`,\n              });\n            });\n\n            document.body.appendChild(scriptEle);\n          } catch (error) {\n            reject(error);\n          }\n        });\n      };\n\n      const base64url = (inString) =>\n        CryptoJS.enc.Base64url.stringify(inString);\n\n      await fullLoader();\n      console.log(\"All scripts loaded successfully\");\n\n      var host_url = Context.getVariable(\"agentassist_url\");\n      var base_url = `${host_url}/koreagentassist-sdk/UI/agentassist-iframe.html`;\n      var agentassist_url = host_url.replace(\"agentassist\", \"smartassist\");\n\n      var client_id = Context.getVariable(\"client_id\");\n      var client_secret = Context.getVariable(\"client_secret\");\n      var bot_id = Context.getVariable(\"bot_id\");\n      var iscall = channel===\"voice\";\n\n      var header = {\n        alg: \"HS256\",\n        typ: \"JWT\",\n      };\n\n      var body = {\n        iss: client_id,\n        sub: \"number\",\n        aud: \"https://idproxy.com/authorize\",\n        botId: bot_id,\n        isAnonymous: true,\n      };\n\n      var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\n      var encodedHeader = base64url(stringifiedHeader);\n      var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\n      var encodedBody = base64url(stringifiedData);\n\n      var token = encodedHeader + \".\" + encodedBody;\n\n      var signature = CryptoJS.HmacSHA256(token, client_secret);\n      signature = base64url(signature);\n\n      var signedToken = token + \".\" + signature;\n\n      const url = new URL(base_url);\n\n      url.searchParams.append(\"token\", signedToken);\n      url.searchParams.append(\"botid\", bot_id);\n      url.searchParams.append(\"agentassisturl\", agentassist_url);\n      url.searchParams.append(\"conversationid\", conversation_id);\n      url.searchParams.append(\"source\", \"talkdesk\");\n      url.searchParams.append(\"isCall\", iscall);\n\n      console.log(\"TalkdeskCardLog Generated URL >.>.>\", url.href);\n      var iframeurl = url.href;\n      Context.setVariable(\"iframeurl\", iframeurl);\n\n      const getElementByXpath = (path) => {\n        return document.evaluate(\n          path,\n          document,\n          null,\n          XPathResult.FIRST_ORDERED_NODE_TYPE,\n          null\n        ).singleNodeValue;\n      };\n      const iframeParent = getElementByXpath(\n        '//*[@id=\"root\"]/div/div[1]/div/div[2]/div/div/div[1]'\n      );\n      if (iframeParent){\n        iframeParent.style.height = Context.getVariable(\"iframe_height\");\n        iframeParent.style.position = \"relative\";\n      }\n\n      actions.goToExit(\"render-frame\");\n    })();\n    return \" \";\n  })();\n}\n",
+              "exits": [
+                {
+                  "handle": "render-view-exit-37298a36-18a7-4a78-9550-35dc95e95d36",
+                  "name": "Render Frame",
+                  "slug": "render-frame"
+                },
+                {
+                  "handle": "render-view-exit-a85de0a7-53d6-48b6-a305-eede57a8fbc7",
+                  "name": "No Active Conversation",
+                  "slug": "no-active-conversation"
+                }
+              ],
+              "compiled_code": "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-ggA"
+            }
+          },
+          "name": "Iframe URL Generator"
+        },
+        {
+          "id": "df3eefe2-2dc7-44fc-b52d-fba9b256c4da",
+          "type": "render-iframe",
+          "namespace": "workspace_designer_cards",
+          "position": { "x": 195, "y": 60 },
+          "data": {
+            "configuration": {
+              "src": {
+                "input_type": "variable",
+                "variable": "bb49eda2-8150-4e03-a024-7ed3ffcab015"
+              },
+              "permissions": {
+                "allow": ["camera", "microphone", "fullscreen"],
+                "sandbox": [
+                  "allow-downloads",
+                  "allow-popups",
+                  "allow-forms",
+                  "allow-scripts",
+                  "allow-same-origin"
+                ]
+              }
+            }
+          },
+          "name": "Iframe Renderer"
+        },
+        {
+          "id": "d4b242d1-5fee-4c80-b17c-c909e0a3bbbf",
+          "type": "simple-render-view",
+          "namespace": "workspace_designer_cards",
+          "position": { "x": 180, "y": 240 },
+          "data": {
+            "configuration": {
+              "components": [
+                {
+                  "id": "7592c238-b6a5-478a-bef9-419134dfd643",
+                  "name": "No Active Conversation",
+                  "type": "text",
+                  "properties": {
+                    "value": "No Active Conversation Detected",
+                    "style": "h4"
+                  }
+                }
+              ]
+            }
+          },
+          "name": "Default View"
+        }
+      ],
+      "edges": [
+        {
+          "id": "reactflow__edge-f03bde01-62ec-4c34-a789-cf6bbdaa03ccrender-view-exit-37298a36-18a7-4a78-9550-35dc95e95d36-df3eefe2-2dc7-44fc-b52d-fba9b256c4daiframe-target",
+          "source": "f03bde01-62ec-4c34-a789-cf6bbdaa03cc",
+          "target": "df3eefe2-2dc7-44fc-b52d-fba9b256c4da",
+          "source_handle": "render-view-exit-37298a36-18a7-4a78-9550-35dc95e95d36",
+          "target_handle": "iframe-target",
+          "type": "edge"
+        },
+        {
+          "id": "reactflow__edge-f03bde01-62ec-4c34-a789-cf6bbdaa03ccrender-view-exit-a85de0a7-53d6-48b6-a305-eede57a8fbc7-d4b242d1-5fee-4c80-b17c-c909e0a3bbbfrender-form-target",
+          "source": "f03bde01-62ec-4c34-a789-cf6bbdaa03cc",
+          "target": "d4b242d1-5fee-4c80-b17c-c909e0a3bbbf",
+          "source_handle": "render-view-exit-a85de0a7-53d6-48b6-a305-eede57a8fbc7",
+          "target_handle": "render-form-target",
+          "type": "edge"
+        },
+        {
+          "id": "reactflow__edge-8acd67f1-2c27-4fa0-92d3-d0f4fbbe4a423c231d47-73b8-404d-ad34-66fdbc923e75-exit-f03bde01-62ec-4c34-a789-cf6bbdaa03ccrender-view-target",
+          "source": "8acd67f1-2c27-4fa0-92d3-d0f4fbbe4a42",
+          "target": "f03bde01-62ec-4c34-a789-cf6bbdaa03cc",
+          "source_handle": "3c231d47-73b8-404d-ad34-66fdbc923e75-exit",
+          "target_handle": "render-view-target",
+          "type": "edge"
+        },
+        {
+          "id": "reactflow__edge-8acd67f1-2c27-4fa0-92d3-d0f4fbbe4a42trigger-exit-f03bde01-62ec-4c34-a789-cf6bbdaa03ccrender-view-target",
+          "source": "8acd67f1-2c27-4fa0-92d3-d0f4fbbe4a42",
+          "target": "f03bde01-62ec-4c34-a789-cf6bbdaa03cc",
+          "source_handle": "trigger-exit",
+          "target_handle": "render-view-target",
+          "type": "edge"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "type": "WORKSPACE_DESIGNER_CARDS",
+    "variables": [
+      {
+        "id": "bb49eda2-8150-4e03-a024-7ed3ffcab015",
+        "name": "iframeurl",
+        "type": "CUSTOM",
+        "configuration": { "source": "currentAutomation", "path": "" }
+      },
+      {
+        "id": "7db89af8-5739-4dc9-a3e2-f20c502d1ca2",
+        "name": "CryptoJS",
+        "type": "CUSTOM",
+        "configuration": {
+          "default_value": "{}",
+          "source": "currentAutomation",
+          "path": ""
+        }
+      },
+      {
+        "id": "8feb3cec-d251-499b-ac7e-cd24815c7007",
+        "name": "client_id",
+        "type": "CUSTOM",
+        "configuration": {
+          "default_value": "<Kore.ai Client ID>",
+          "source": "currentAutomation",
+          "path": ""
+        }
+      },
+      {
+        "id": "6b56557b-2dc5-4b88-bd7f-b5c1edb0b4fc",
+        "name": "client_secret",
+        "type": "CUSTOM",
+        "configuration": {
+          "default_value": "<Kore.ai Client Secret>",
+          "source": "currentAutomation",
+          "path": ""
+        }
+      },
+      {
+        "id": "659f20c8-0b8b-4820-9add-fc8f5167dc10",
+        "name": "bot_id",
+        "type": "CUSTOM",
+        "configuration": {
+          "default_value": "<Kore.ai Bot ID>",
+          "source": "currentAutomation",
+          "path": ""
+        }
+      },
+      {
+        "id": "6fe3ae4f-06cd-4ede-ae01-7a3114cc9d2c",
+        "name": "agentassist_url",
+        "type": "CUSTOM",
+        "configuration": {
+          "source": "currentAutomation",
+          "path": "",
+          "default_value": "<Kore.ai Base URL>"
+        }
+      },
+      {
+        "id": "e685712c-631e-44df-9437-8402b4791b37",
+        "name": "iframe_height",
+        "type": "CUSTOM",
+        "configuration": {
+          "default_value": "600px",
+          "source": "currentAutomation",
+          "path": ""
+        }
+      },
+      {
+        "id": "df93b2f7-18dc-44ff-b9d5-5d0fae6714a3",
+        "name": "channel",
+        "type": "CUSTOM",
+        "configuration": {
+          "source": "workspace",
+          "path": "active-conversation.channel"
+        }
+      },
+      {
+        "id": "80dfab71-0264-4a67-a460-a5150d8f744c",
+        "name": "active_user_id",
+        "descriptioni18n_key": "workspaceDesignerCards:system.variables.active_user_id",
+        "type": "SYSTEM"
+      },
+      {
+        "id": "c09d303b-4fb6-4038-806e-317e0938669f",
+        "name": "active_user_email",
+        "descriptioni18n_key": "workspaceDesignerCards:system.variables.active_user_email",
+        "type": "SYSTEM"
+      },
+      {
+        "id": "390fec3c-1001-4c64-9c8a-e47b75090104",
+        "name": "active_user_name",
+        "descriptioni18n_key": "workspaceDesignerCards:system.variables.active_user_name",
+        "type": "SYSTEM"
+      },
+      {
+        "id": "4d4c7836-575c-40ad-9a23-14c1773c9afe",
+        "name": "contact_id",
+        "descriptioni18n_key": "workspaceDesignerCanvas:system.variables.contact_id",
+        "type": "SYSTEM"
+      },
+      {
+        "id": "a25b6615-fc4b-4cb8-aefb-b3b5170083b6",
+        "name": "interaction_id",
+        "descriptioni18n_key": "workspaceDesignerCanvas:system.variables.interaction_id",
+        "type": "SYSTEM"
+      }
+    ]
+  },
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,129 @@
+{
+  "id": "6fbd0ffd-0ac3-4f7e-9cfb-f6292aab80b8",
+  "name": "Call-end Summary Trigger",
+  "type": "WORKSPACE_DESIGNER_CARDS",
+  "publish_state": "DEPLOYED",
+  "last_updated": "2023-11-21T13:02:32.434699Z",
+  "last_published": "2023-11-21T13:03:47.025941Z",
+  "content": [
+    {
+      "id": "7186a20e-f723-4f77-9969-ae81ea3e6100",
+      "name": "",
+      "creation_index": 1,
+      "nodes": [
+        {
+          "id": "d244128a-e3d6-4ccd-973d-98c34bda2bed",
+          "type": "card-trigger",
+          "namespace": "WORKSPACE_DESIGNER_CARDS",
+          "position": { "x": -130, "y": -25 },
+          "data": {
+            "configuration": {
+              "events": [
+                {
+                  "id": "766ba56e-0cc6-4fec-a73f-5c50f0afe1e6",
+                  "namespace": "rtm",
+                  "type": "call_finished",
+                  "properties": {},
+                  "exit_handle": "766ba56e-0cc6-4fec-a73f-5c50f0afe1e6-exit"
+                }
+              ]
+            }
+          },
+          "name": "Trigger Definition"
+        },
+        {
+          "id": "d0b53bfd-8456-4952-ab3e-5f8994aa82bc",
+          "type": "render-view",
+          "namespace": "workspace_designer_cards",
+          "position": { "x": 255, "y": -75 },
+          "data": {
+            "configuration": {
+              "code": "{\n  (() => {\n    console.log(\"TalkdeskCardLog >.>.> End of call detected\");\n    const getElementByXpath = (path) => {\n      return document.evaluate(\n        path,\n        document,\n        null,\n        XPathResult.FIRST_ORDERED_NODE_TYPE,\n        null\n      ).singleNodeValue;\n    };\n\n    const triggerCardElement = getElementByXpath(\n      '//*[@id=\"root\"]/div/div[1]/div/div[2]/div/div/div[2]'\n    );\n    if (!triggerCardElement) return \"\";\n\n    triggerCardElement.style.border = \"solid 1px red\";\n    triggerCardElement.style.position = \"relative\";\n    triggerCardElement.style.height = \"80px\";\n    triggerCardElement.style.top = \"10px\";\n    triggerCardElement.style.overflow = \"hidden\";\n\n    const koreIFPath =\n      '//*[@id=\"root\"]/div/div[1]/div/div[2]/div/div/div[1]/div/div/div/iframe';\n    const koreIframe = getElementByXpath(koreIFPath);\n    if (!koreIframe) return \"\";\n\n\n    console.log(\"TalkdeskCardLog Kore Iframe Element >.>.>\", koreIframe);\n\n    var message = {};\n    message[\"payload\"] = {};\n    message[\"payload\"].chatHistory = [];\n    message[\"conversationId\"] = Context.getVariable(\"interaction_id\");\n    message[\"name\"] = \"agentAssist.endOfConversation\";\n    message[\"botId\"] = Context.getVariable(\"bot_id\");\n    console.log(\"TalkdeskCardLog content to post to vfwindow >.>.>.>\", message);\n\n    if (koreIframe) {\n      console.log(\"TalkdeskCardLog >.>.> posting end of conversation to AA Widget now\");\n      koreIframe.contentWindow.postMessage(message, \"*\"); //window.location.protocol+'//'+window.location.host);\n    }\n    return \"\";\n  })();\n}\n",
+              "exits": [],
+              "compiled_code": "N4KABGAUkJRgvAPjKCEDGB7AdgZ0wDYCmAdAZgOaQBEAKgIYEDWAJkbkwML0BOLAMpTCISI5AFFsLMJgBmYdIwJg2AFyLp1LajADc4NFjyqwFIqvHEAtkWyqAQgE8AGgAd6qgBYIw7rwmRUNAgecwBXHmwVTHQwmzsSIgA3RjCPIkg-TwAaaNj41VzsMIICXOcABQ9PACV2EtUSADEASRqAZVoAfQB5GoARcRrxfq6AOR7BrtoATQrxIpKCGBJcAEtsCmIxzDYANVSifWCAX2PDHFwTVR41ijMebj5LIgKfMwtrWwcXLMgAcgA9ICAFQAbQAAmsWPBqDxMJhVNQALqAlhrJJojFggCMqPRmIJYIATPiMVjCdjSf89AYIGt5JAAIQ3O4PJ4sF4FOChVQRKLUajnCCs+5ER68TlfBJXRzEEgAI0wfHFPmo+AI0LAONcAA8wKFtMKwKL2ZKud9Vqo5aRXJh1qo1jg1aECB4MUQhXSTbcxRLntLGrL5Z4iHdPCZ4GBqAAOAAMeq9wVN4o5Fpl1vlqkwrjVOITuqTaBT-qlr0twdImCS4tk5AA7mrPNC2NgixhLiYmMqiC0mlV-FGgaDIdDYfDESiKRTcWTKUkSXPp0S8cvyQTAQyePQbP9jUYrmBu6EWrJtzZ3uZ0z83NVIMfe-3qrTggyoEyH6fz0QeeFItH2wUS5CFIcgqDoRhWHYLhJUECgwAAaR7MAvx3IgwGvYRRFEahck-M80JfNAUh4MAbFwXB6DMHxgDOb1yMoswwWodw5UwehtGRGi6OCBiqKIZjWPIDiURIdBPA8AAJNYrmVRwfDBZFjT4pjqCMGseEox0cBaTifE4HB1F1RoPgOW56AVYgaA2dRt00J1sC6aEdGU9hGIE6hsDQlE1X4uwAEEKJkxpbBYHpZAM7ANK0hzAJUjylVUXSfKjSKjJM8wzLWCyrOoRKnO0IiOzwECyEoGgGGYNgOA5OCgLsb4TUwXx7WuZqklkesNhYTBGzEbDEFwsi3P4oqwDfe8e1Qmw4CCYID1KsCKsg6qYL4Or+uQO0rg2eDQpkeR1PFGLnWzMB-P8sAAHVoQ+MBsF6lzvQgfDvzEwzvhuqRepIbbVAAWRGsxIHi3JqBBFywGBLrvvrMrFG07BfvhbMsAIABqYd-nRmGerh8gEYckhPFasaThAb1eX5ADzhOGBYH0E4gA"
+            }
+          },
+          "name": "Trigger Function"
+        },
+        {
+          "id": "ea450f69-148d-46ae-9f66-eb949a355913",
+          "type": "render-view",
+          "namespace": "workspace_designer_cards",
+          "position": { "x": 285, "y": 240 },
+          "data": {
+            "configuration": {
+              "code": "{\n  (() => {\n    console.log(\"TalkdeskCardLog >.>.> End of call detected\");\n    const getElementByXpath = (path) => {\n      return document.evaluate(\n        path,\n        document,\n        null,\n        XPathResult.FIRST_ORDERED_NODE_TYPE,\n        null\n      ).singleNodeValue;\n    };\n    const triggerCardElement = getElementByXpath(\n      '//*[@id=\"root\"]/div/div[1]/div/div[2]/div/div/div[2]'\n    );\n    if (!triggerCardElement) return \"\";\n    triggerCardElement.style.border = \"solid 1px red\";\n    triggerCardElement.style.position = \"relative\";\n    triggerCardElement.style.height = \"80px\";\n    triggerCardElement.style.top = \"10px\";\n    triggerCardElement.style.overflow = \"hidden\";\n    return \"\";\n  })();\n}\n",
+              "compiled_code": "N4KABGAUkJRgvAPjKCEDGB7AdgZ0wDYCmAdAZgOaQBEAKgIYEDWAJkbkwML0BOLAMpTCISI5AFFsLMJgBmYdIwJg2AFyLp1LajADc4NFjyqwFIqvHEAtkWyqAQgE8AGgAd6qgBYIw7rwmRUNAgecwBXHmwVTHQwmzsSIgA3RjCPIkg-TwAaaNj41VzsMIICXOcABQ9PACV2EtUSADEASRqAZVoAfQB5GoARcRrxfq6AOR7BrtoATQrxIpKCGBJcAEtsCmIxzDYANVSifWCAX2PDHFwTVR41ijMebj5LIgKfMwtrWwcXLMgAcgA9ICAFQAbQAAmsWPBqDxMJhVNQALqAlhrJJojFggCMqPRmIJYIATPiMVjCdjSf89AYIGt5JAAIQ3O4PJ4sF4FOChVQRKLUajnCCs+5ER68TlfBJXRzEEgAI0wfHFPmo+AI0LAONcAA8wKFtMKwKL2ZKud9Vqo5aRXJh1qo1jg1aECB4MUQhXSTbcxRLntLGrL5Z4iHdPCZ4GBqAAOAAMeq9wVN4o5Fpl1vlqkwrjVOITuqTaBT-qlr0twdImCS4tk5AA7mrPNC2NgiyFwpFo0WTjBYPoTkA",
+              "exits": []
+            }
+          },
+          "name": "Default View"
+        }
+      ],
+      "edges": [
+        {
+          "id": "reactflow__edge-d244128a-e3d6-4ccd-973d-98c34bda2bed766ba56e-0cc6-4fec-a73f-5c50f0afe1e6-exit-d0b53bfd-8456-4952-ab3e-5f8994aa82bcrender-view-target",
+          "source": "d244128a-e3d6-4ccd-973d-98c34bda2bed",
+          "target": "d0b53bfd-8456-4952-ab3e-5f8994aa82bc",
+          "source_handle": "766ba56e-0cc6-4fec-a73f-5c50f0afe1e6-exit",
+          "target_handle": "render-view-target",
+          "type": "edge"
+        },
+        {
+          "id": "reactflow__edge-d244128a-e3d6-4ccd-973d-98c34bda2bedtrigger-exit-ea450f69-148d-46ae-9f66-eb949a355913render-view-target",
+          "source": "d244128a-e3d6-4ccd-973d-98c34bda2bed",
+          "target": "ea450f69-148d-46ae-9f66-eb949a355913",
+          "source_handle": "trigger-exit",
+          "target_handle": "render-view-target",
+          "type": "edge"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "type": "WORKSPACE_DESIGNER_CARDS",
+    "variables": [
+      {
+        "id": "d40e55aa-9953-440e-a5f0-d729c29d0304",
+        "name": "bot_id",
+        "type": "CUSTOM",
+        "configuration": {
+          "default_value": "<Kore.ai Bot ID>",
+          "source": "currentAutomation",
+          "path": ""
+        }
+      },
+      {
+        "id": "80dfab71-0264-4a67-a460-a5150d8f744c",
+        "name": "active_user_id",
+        "descriptioni18n_key": "workspaceDesignerCards:system.variables.active_user_id",
+        "type": "SYSTEM"
+      },
+      {
+        "id": "c09d303b-4fb6-4038-806e-317e0938669f",
+        "name": "active_user_email",
+        "descriptioni18n_key": "workspaceDesignerCards:system.variables.active_user_email",
+        "type": "SYSTEM"
+      },
+      {
+        "id": "390fec3c-1001-4c64-9c8a-e47b75090104",
+        "name": "active_user_name",
+        "descriptioni18n_key": "workspaceDesignerCards:system.variables.active_user_name",
+        "type": "SYSTEM"
+      },
+      {
+        "id": "4d4c7836-575c-40ad-9a23-14c1773c9afe",
+        "name": "contact_id",
+        "descriptioni18n_key": "workspaceDesignerCanvas:system.variables.contact_id",
+        "type": "SYSTEM"
+      },
+      {
+        "id": "a25b6615-fc4b-4cb8-aefb-b3b5170083b6",
+        "name": "interaction_id",
+        "descriptioni18n_key": "workspaceDesignerCanvas:system.variables.interaction_id",
+        "type": "SYSTEM"
+      }
+    ]
+  },
+  "schema_version": "1.0.0"
+}
