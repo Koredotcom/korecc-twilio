@@ -1,0 +1,34 @@
+/**
+* Class Name         : CustomCTIExtensions
+* Developer          : Kore.ai          
+* Created Date       : 27-09-2023
+* @description       : This class implements the interface methods of Genesys package which helps user to write custom functionlaity at the begining of converasation and end of the conversation.
+* Last Modified Date : 
+*/
+global with sharing class CustomCTIExtensions implements 
+purecloud.CTIExtension.ScreenPop,
+purecloud.CTIExtension.SaveLog 
+{
+    
+  /**
+   * @description Notifies the conversation is ended 
+   * @param data of the calleduser and status of the call
+   * @return sample string
+   */ 
+    public String onSaveLog(String data) {
+       KAA.CTI_OpenCTIUtilityHandler.genOnCallEnded(data);
+        return 'onSaveLog';
+    }
+    
+    /**
+	* @description Notifies that has come to genesys. 
+	* @param data of the calleduser
+	* @return tells the called method to use standard defaultScreenPop
+	*/ 
+    public String onScreenPop(String data) {
+        Map<String, Object> dataToReturn = new Map<String, Object>();
+        KAA.CTI_OpenCTIUtilityHandler.incomingCallData(data);
+        dataToReturn.put('defaultScreenPop', true);
+        return JSON.serialize(dataToReturn);
+    }
+}
