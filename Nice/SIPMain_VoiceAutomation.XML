@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScriptContainer xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="http://lab-iniws01/scriptcontainer.xsd" BusNo="4606881" UserID="39297312">
+  <Actions>
+    <ActionStruct>
+      <ActionID>21</ActionID>
+      <Action>SNIPPET</Action>
+      <Caption>POCTransfer</Caption>
+      <Parameters>
+        <string>ASSIGN spawned=true
+ASSIGN callerid="{ani}"</string>
+        <string>Limit2K</string>
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>3</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases />
+      <X>672</X>
+      <Y>128</Y>
+      <DependencyOrder>0</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>b333da63-33c8-4297-a58a-e9546cf7f0f2</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>3</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>20</ActionID>
+      <Action>PLAY</Action>
+      <Caption>Play</Caption>
+      <Parameters>
+        <string>"%Ending the Call"</string>
+        <string />
+        <string>True</string>
+        <string>True</string>
+        <string />
+        <string />
+        <string />
+        <string />
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>13</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases />
+      <X>752</X>
+      <Y>352</Y>
+      <DependencyOrder>12</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>b1b9a2dd-65b6-4626-9cf5-9cfa69cf59e2</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>13</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>19</ActionID>
+      <Action>IF</Action>
+      <Caption>Check for active call</Caption>
+      <Parameters>
+        <string>spawned = true</string>
+      </Parameters>
+      <Branches>
+        <BranchStruct>
+          <Text>True</Text>
+          <ActionID>18</ActionID>
+          <Index>0</Index>
+          <Segments />
+        </BranchStruct>
+      </Branches>
+      <Cases />
+      <X>320</X>
+      <Y>800</Y>
+      <DependencyOrder>16</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>6695ba9c-e1d6-4f3c-a15a-94f1400e3169</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>-1</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches>
+          <BranchInfo>
+            <KeyName>0</KeyName>
+            <ActionId>18</ActionId>
+            <Segments />
+          </BranchInfo>
+        </Branches>
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>18</ActionID>
+      <Action>SIGNAL</Action>
+      <Caption>Signal</Caption>
+      <Parameters>
+        <string>{SPAWNID}</string>
+        <string />
+        <string>end</string>
+      </Parameters>
+      <Branches />
+      <Cases />
+      <X>416</X>
+      <Y>800</Y>
+      <DependencyOrder>14</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>0b8f561d-889e-4f1b-bf42-f36469b8f7a0</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>-1</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>17</ActionID>
+      <Action>ONRELEASE</Action>
+      <Caption>Onrelease</Caption>
+      <Parameters>
+        <string />
+        <string />
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>19</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases />
+      <X>224</X>
+      <Y>800</Y>
+      <DependencyOrder>13</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>ea1363d4-fade-4cac-b15e-c4c514c2f9b5</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>19</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>16</ActionID>
+      <Action>REQAGENT</Action>
+      <Caption>Reqagent</Caption>
+      <Parameters>
+        <string>Default</string>
+        <string>39297312</string>
+        <string>DefaultfromSkill</string>
+        <string>0</string>
+        <string>1</string>
+        <string />
+        <string>1000</string>
+        <string />
+        <string>AfterSequence</string>
+        <string>DefaultFromSkill</string>
+        <string />
+        <string>1</string>
+        <string>20</string>
+        <string>NotApplicable</string>
+      </Parameters>
+      <Branches />
+      <Cases />
+      <X>384</X>
+      <Y>592</Y>
+      <DependencyOrder>10</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>689a4a1b-fa0d-47b3-9a02-cbeb4735f08f</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>-1</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>15</ActionID>
+      <Action>PLAY</Action>
+      <Caption>Play</Caption>
+      <Parameters>
+        <string>"%Disconnected from the bot transferring you to an agent
+"</string>
+        <string />
+        <string>True</string>
+        <string>True</string>
+        <string />
+        <string />
+        <string />
+        <string />
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>16</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases />
+      <X>240</X>
+      <Y>592</Y>
+      <DependencyOrder>9</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>b1b9a2dd-65b6-4626-9cf5-9cfa69cf59e2</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>16</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>13</ActionID>
+      <Action>HANGUP</Action>
+      <Caption>Hangup</Caption>
+      <Parameters />
+      <Branches />
+      <Cases />
+      <X>880</X>
+      <Y>480</Y>
+      <DependencyOrder>11</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>b64a6796-4f66-4b1b-a9b5-3af926ab4b7c</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>-1</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>12</ActionID>
+      <Action>CASE</Action>
+      <Caption>sp2.size</Caption>
+      <Parameters>
+        <string>sp2.size</string>
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>11</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases>
+        <BranchStruct>
+          <Text>0</Text>
+          <ActionID>6</ActionID>
+          <Index>0</Index>
+          <Segments />
+        </BranchStruct>
+      </Cases>
+      <X>240</X>
+      <Y>352</Y>
+      <DependencyOrder>8</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>22050500-6dc0-4949-af9c-1e52975f141d</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>11</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches>
+          <BranchInfo>
+            <KeyName>0</KeyName>
+            <ActionId>6</ActionId>
+            <Segments />
+          </BranchInfo>
+        </CaseBranches>
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>11</ActionID>
+      <Action>UNLINK</Action>
+      <Caption>Unlink</Caption>
+      <Parameters />
+      <DefaultNextAction>
+        <Text />
+        <ActionID>15</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases />
+      <X>240</X>
+      <Y>512</Y>
+      <DependencyOrder>7</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>33afbfd3-4a2b-4566-be9c-5202c9d4c396</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>15</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>9</ActionID>
+      <Action>SNIPPET</Action>
+      <Caption>Snippet</Caption>
+      <Parameters>
+        <string>ASSIGN answered=true
+</string>
+        <string>Limit2K</string>
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>4</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases />
+      <X>555</X>
+      <Y>489</Y>
+      <DependencyOrder>6</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>b333da63-33c8-4297-a58a-e9546cf7f0f2</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>4</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>8</ActionID>
+      <Action>WAIT</Action>
+      <Caption>Wait 10</Caption>
+      <Parameters>
+        <string>10</string>
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>20</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases />
+      <X>885</X>
+      <Y>132</Y>
+      <DependencyOrder>5</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>5bf67b1c-9736-434d-9b6f-0d856aea8f16</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>20</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>6</ActionID>
+      <Action>CASE</Action>
+      <Caption>SpawnResult</Caption>
+      <Parameters>
+        <string>SpawnResult</string>
+      </Parameters>
+      <Branches />
+      <Cases>
+        <BranchStruct>
+          <Text>Answered</Text>
+          <ActionID>9</ActionID>
+          <Index>0</Index>
+          <Segments />
+        </BranchStruct>
+        <BranchStruct>
+          <Text>Sip_Not_Available</Text>
+          <ActionID>20</ActionID>
+          <Index>0</Index>
+          <Segments />
+        </BranchStruct>
+      </Cases>
+      <X>555</X>
+      <Y>357</Y>
+      <DependencyOrder>4</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>22050500-6dc0-4949-af9c-1e52975f141d</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>-1</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches>
+          <BranchInfo>
+            <KeyName>Answered</KeyName>
+            <ActionId>9</ActionId>
+            <Segments />
+          </BranchInfo>
+          <BranchInfo>
+            <KeyName>Sip_Not_Available</KeyName>
+            <ActionId>20</ActionId>
+            <Segments />
+          </BranchInfo>
+        </CaseBranches>
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>5</ActionID>
+      <Action>ONSIGNAL</Action>
+      <Caption>Onsignal</Caption>
+      <Parameters>
+        <string>S1</string>
+        <string />
+        <string>SpawnResult</string>
+        <string>signal</string>
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>12</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases />
+      <X>48</X>
+      <Y>352</Y>
+      <DependencyOrder>3</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>de09a7de-6654-4642-a86a-87ffbe75c7d7</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>12</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>4</ActionID>
+      <Action>LINK</Action>
+      <Caption>Link</Caption>
+      <Parameters>
+        <string>{SPAWNID}</string>
+        <string>False</string>
+        <string>False</string>
+      </Parameters>
+      <Branches>
+        <BranchStruct>
+          <Text>Error</Text>
+          <ActionID>13</ActionID>
+          <Index>0</Index>
+          <Segments />
+        </BranchStruct>
+      </Branches>
+      <Cases />
+      <X>753</X>
+      <Y>489</Y>
+      <DependencyOrder>2</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>22d4e459-3bcb-4234-a000-f1512ea9d8a9</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>-1</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches>
+          <BranchInfo>
+            <KeyName>0</KeyName>
+            <ActionId>13</ActionId>
+            <Segments />
+          </BranchInfo>
+        </Branches>
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>3</ActionID>
+      <Action>SPAWN</Action>
+      <Caption>SIP Spawn</Caption>
+      <Parameters>
+        <string>SIP Spawn</string>
+        <string>SPAWNID</string>
+        <string>{dialoutSkill}</string>
+        <string />
+        <string />
+        <string>{callerid}</string>
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>8</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches>
+        <BranchStruct>
+          <Text>Error</Text>
+          <ActionID>20</ActionID>
+          <Index>2</Index>
+          <Segments />
+        </BranchStruct>
+      </Branches>
+      <Cases />
+      <X>752</X>
+      <Y>128</Y>
+      <DependencyOrder>1</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>e86250d4-8659-4df0-937e-1f50e64e180e</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>8</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches>
+          <BranchInfo>
+            <KeyName>2</KeyName>
+            <ActionId>20</ActionId>
+            <Segments />
+          </BranchInfo>
+        </Branches>
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+    <ActionStruct>
+      <ActionID>1</ActionID>
+      <Action>BEGIN</Action>
+      <Caption>Entry Script</Caption>
+      <Parameters>
+        <string />
+        <string />
+        <string />
+      </Parameters>
+      <DefaultNextAction>
+        <Text />
+        <ActionID>21</ActionID>
+        <Index>0</Index>
+        <Segments />
+      </DefaultNextAction>
+      <Branches />
+      <Cases />
+      <X>464</X>
+      <Y>128</Y>
+      <DependencyOrder>15</DependencyOrder>
+      <Impl_Type>0</Impl_Type>
+      <LibraryID>b2f794c5-0232-40e7-9830-76d573bf57d7</LibraryID>
+      <ExtraInfo>
+        <DefaultBranch>
+          <ActionId>21</ActionId>
+          <Segments />
+        </DefaultBranch>
+        <Branches />
+        <CaseBranches />
+      </ExtraInfo>
+      <xws>0</xws>
+      <yws>0</yws>
+    </ActionStruct>
+  </Actions>
+  <LibraryItem LibraryID="52b3aa47-cb80-4c1d-b6c3-9093d0c0ee2e" ApiClassificationId="0" BusNo="4606881" Name="SIP Main" Alias="SIP Main" MediaType="4" RouteOrder="1000" RoutingMode="" VariableRedaction="">
+    <Icon>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</Icon>
+    <ImplPath>SadainAli\SIP Main</ImplPath>
+    <CreateDate>2023-10-19T13:39:19.85</CreateDate>
+    <ModifyDate>2023-11-07T15:21:41.827</ModifyDate>
+    <ModifyUserID>39297312</ModifyUserID>
+    <ModifiedBy>Shahrukh Khan</ModifiedBy>
+    <URI>/custom/4599320/INT_SA_PhoneCall_Kore_SIP_main</URI>
+    <DefaultTimeZone>Mountain Standard Time</DefaultTimeZone>
+    <Parameters />
+    <Branches />
+  </LibraryItem>
+  <MediaType>4</MediaType>
+  <ModifyDate>0001-01-01T00:00:00</ModifyDate>
+</ScriptContainer>
