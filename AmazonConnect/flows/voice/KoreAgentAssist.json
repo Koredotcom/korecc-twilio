@@ -1,0 +1,321 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "856dd865-e5a0-49c6-aacc-55fe53c38a22",
+  "Metadata": {
+    "entryPointPosition": { "x": -620, "y": 17.6 },
+    "ActionMetadata": {
+      "2a9a8b62-fd22-467a-8e76-aab5ff35d63f": {
+        "position": { "x": 1282.4, "y": 88 }
+      },
+      "99458f47-6941-48ce-9b90-fdf184759b22": {
+        "position": { "x": 2094.4, "y": -31.2 }
+      },
+      "410057d0-9390-486b-bbb4-c4def2a7367c": {
+        "position": { "x": 306.4, "y": 370.4 }
+      },
+      "3f9659a3-56a5-4f3c-a431-fd9da2306459": {
+        "position": { "x": 830.4, "y": 321.6 }
+      },
+      "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6": {
+        "position": { "x": 1547.2, "y": -44.8 },
+        "parameters": {
+          "ContactFlowId": { "displayName": "Sample queue customer" }
+        },
+        "ContactFlow": { "text": "Sample queue customer" }
+      },
+      "28cdee97-d2fe-4b16-8b72-dce8c1f56588": {
+        "position": { "x": 1834.4, "y": -47.2 },
+        "parameters": {
+          "EventHooks": {
+            "DisconnectAgentUI": { "displayName": "Disposition Flow" }
+          }
+        }
+      },
+      "856dd865-e5a0-49c6-aacc-55fe53c38a22": {
+        "position": { "x": -484.8, "y": -1.6 }
+      },
+      "0ac2523b-be01-42ed-8e31-591228338d56": {
+        "position": { "x": -222.4, "y": -6.4 },
+        "overrideConsoleVoice": true
+      },
+      "c01b7986-1128-4a12-ad7e-128a40a54ef3": {
+        "position": { "x": 1068.8, "y": 180.8 }
+      },
+      "d054f0d0-444b-4e4a-aade-6f06521a23af": {
+        "position": { "x": 1072, "y": -40.8 },
+        "parameters": { "Attributes": { "token": { "useDynamic": true } } },
+        "dynamicParams": ["token"]
+      },
+      "Kore Token Generator for TPA": {
+        "position": { "x": 822.4, "y": -43.2 },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaInvocationAttributes": {
+            "botId": { "useDynamic": true },
+            "clientId": { "useDynamic": true },
+            "clientSecret": { "useDynamic": true }
+          }
+        },
+        "dynamicMetadata": {
+          "botId": true,
+          "clientId": true,
+          "clientSecret": true
+        }
+      },
+      "6728609a-9707-41f7-a87c-30ac1fde4f4c": {
+        "position": { "x": 36.8, "y": -36.8 },
+        "toCustomer": true,
+        "fromCustomer": true
+      },
+      "Start Stream and Transcription in Kore": {
+        "position": { "x": 525.6, "y": -47.2 },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaInvocationAttributes": {
+            "botId": { "useDynamic": true },
+            "clientId": { "useDynamic": true },
+            "clientSecret": { "useDynamic": true },
+            "agentassistUrl": { "useDynamic": true },
+            "wssUrl": { "useDynamic": true },
+            "sipUri": { "useDynamic": true },
+            "accountId": { "useDynamic": true }
+          }
+        },
+        "dynamicMetadata": {
+          "botId": true,
+          "clientId": true,
+          "clientSecret": true,
+          "agentassistUrl": true,
+          "wssUrl": true,
+          "sipUri": true,
+          "accountId": true
+        }
+      },
+      "e7825b58-a9db-4935-9f83-e67a564176e8": {
+        "position": { "x": 292.8, "y": -51.2 },
+        "dynamicParams": []
+      }
+    },
+    "Annotations": [],
+    "name": "KoreAgentAssist",
+    "description": "For AgentAssist vioce integration purpose",
+    "type": "contactFlow",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": { "Text": "Failed to save token to flow" },
+      "Identifier": "2a9a8b62-fd22-467a-8e76-aab5ff35d63f",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6",
+        "Errors": [
+          {
+            "NextAction": "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "99458f47-6941-48ce-9b90-fdf184759b22",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Text": "An error occurred when we tried to start streaming."
+      },
+      "Identifier": "410057d0-9390-486b-bbb4-c4def2a7367c",
+      "Type": "MessageParticipant",
+      "Transitions": { "NextAction": "28cdee97-d2fe-4b16-8b72-dce8c1f56588" }
+    },
+    {
+      "Parameters": {
+        "Text": "An error occurred with the KVS trigger lambda function."
+      },
+      "Identifier": "3f9659a3-56a5-4f3c-a431-fd9da2306459",
+      "Type": "MessageParticipant",
+      "Transitions": { "NextAction": "28cdee97-d2fe-4b16-8b72-dce8c1f56588" }
+    },
+    {
+      "Parameters": {
+        "ContactFlowId": ""
+      },
+      "Identifier": "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6",
+      "Type": "TransferToFlow",
+      "Transitions": {
+        "NextAction": "28cdee97-d2fe-4b16-8b72-dce8c1f56588",
+        "Errors": [
+          {
+            "NextAction": "28cdee97-d2fe-4b16-8b72-dce8c1f56588",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "DisconnectAgentUI": ""
+        }
+      },
+      "Identifier": "28cdee97-d2fe-4b16-8b72-dce8c1f56588",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "99458f47-6941-48ce-9b90-fdf184759b22",
+        "Errors": [
+          {
+            "NextAction": "99458f47-6941-48ce-9b90-fdf184759b22",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": { "FlowLoggingBehavior": "Enabled" },
+      "Identifier": "856dd865-e5a0-49c6-aacc-55fe53c38a22",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": { "NextAction": "0ac2523b-be01-42ed-8e31-591228338d56" }
+    },
+    {
+      "Parameters": {
+        "TextToSpeechEngine": "Neural",
+        "TextToSpeechStyle": "None",
+        "TextToSpeechVoice": "Ruth"
+      },
+      "Identifier": "0ac2523b-be01-42ed-8e31-591228338d56",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": { "NextAction": "6728609a-9707-41f7-a87c-30ac1fde4f4c" }
+    },
+    {
+      "Parameters": { "Text": "Failed to generate token" },
+      "Identifier": "c01b7986-1128-4a12-ad7e-128a40a54ef3",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6",
+        "Errors": [
+          {
+            "NextAction": "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": { "token": "$.External.koreiframetoken" },
+        "TargetContact": "Current"
+      },
+      "Identifier": "d054f0d0-444b-4e4a-aade-6f06521a23af",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6",
+        "Errors": [
+          {
+            "NextAction": "2a9a8b62-fd22-467a-8e76-aab5ff35d63f",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "",
+        "InvocationTimeLimitSeconds": "8",
+        "LambdaInvocationAttributes": {
+          "botId": "$.Attributes.botId",
+          "clientId": "$.Attributes.clientId",
+          "clientSecret": "$.Attributes.clientSecret"
+        },
+        "ResponseValidation": { "ResponseType": "STRING_MAP" }
+      },
+      "Identifier": "Kore Token Generator for TPA",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "d054f0d0-444b-4e4a-aade-6f06521a23af",
+        "Errors": [
+          {
+            "NextAction": "c01b7986-1128-4a12-ad7e-128a40a54ef3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "MediaStreamingState": "Enabled",
+        "MediaStreamType": "Audio",
+        "Participants": [
+          { "ParticipantType": "Customer", "MediaDirections": ["To", "From"] }
+        ]
+      },
+      "Identifier": "6728609a-9707-41f7-a87c-30ac1fde4f4c",
+      "Type": "UpdateContactMediaStreamingBehavior",
+      "Transitions": {
+        "NextAction": "e7825b58-a9db-4935-9f83-e67a564176e8",
+        "Errors": [
+          {
+            "NextAction": "410057d0-9390-486b-bbb4-c4def2a7367c",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "",
+        "InvocationTimeLimitSeconds": "8",
+        "LambdaInvocationAttributes": {
+          "botId": "$.Attributes.botId",
+          "clientId": "$.Attributes.clientId",
+          "clientSecret": "$.Attributes.clientSecret",
+          "agentassistUrl": "$.Attributes.agentassistUrl",
+          "wssUrl": "$.Attributes.wssUrl",
+          "sipUri": "$.Attributes.sipUri",
+          "accountId": "$.Attributes.accountId"
+        },
+        "ResponseValidation": { "ResponseType": "STRING_MAP" }
+      },
+      "Identifier": "Start Stream and Transcription in Kore",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "Kore Token Generator for TPA",
+        "Errors": [
+          {
+            "NextAction": "3f9659a3-56a5-4f3c-a431-fd9da2306459",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "botId": "Replace with Kore.ai Bot ID",
+          "clientId": "Replace with Kore.ai Client ID",
+          "clientSecret": "Replace with Kore.ai Client Secret",
+          "agentassistUrl": "https://agentassist.kore.ai",
+          "languageCode": "en-US",
+          "wssUrl": "wss://savg-webserver.kore.ai",
+          "sipUri": "Replace with Kore.ai Bot SIP URI",
+          "accountId": "Replace with Kore.ai Account ID"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "e7825b58-a9db-4935-9f83-e67a564176e8",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Start Stream and Transcription in Kore",
+        "Errors": [
+          {
+            "NextAction": "Start Stream and Transcription in Kore",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
