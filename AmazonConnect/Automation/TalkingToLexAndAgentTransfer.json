@@ -1,1 +1,351 @@
-{"Version":"2019-10-30","StartAction":"streaming","Metadata":{"entryPointPosition":{"x":-148,"y":11.2},"ActionMetadata":{"streaming":{"position":{"x":-62.4,"y":-19.2},"isFriendlyName":true,"toCustomer":true,"fromCustomer":true},"67dda135-2090-4b0c-bf32-dcaa4a61e8fe":{"position":{"x":656.8,"y":376}},"a88c4128-6412-4b36-bdd0-268a800e24a4":{"position":{"x":987.2,"y":-72.8},"parameters":{"ContactFlowId":{"displayName":"KVSAgentAssist"}},"ContactFlow":{"text":"KVSAgentAssist"}},"c696c183-6a04-4889-bc42-9a64d80bc0fe":{"position":{"x":990.4,"y":229.6}},"65910ab9-1679-4917-926a-332331872464":{"position":{"x":387.2,"y":180.8},"parameters":{"LambdaFunctionARN":{"displayName":"InvokeFromConnectToLex"},"LambdaInvocationAttributes":{"contactno":{"useDynamic":true},"clientId":{"useDynamic":true},"clientSecret":{"useDynamic":true},"botId":{"useDynamic":true},"webhookURL":{"useDynamic":true}}},"dynamicMetadata":{"contactno":true,"clientId":true,"clientSecret":true,"botId":true,"webhookURL":true}},"db72e8aa-77a0-4d6f-9f1f-98c8628811d1":{"position":{"x":644,"y":-16},"parameters":{"Text":{"useDynamic":true},"LexSessionAttributes":{"useNLMeta":{"useDynamic":true},"from.id":{"useDynamic":true}}},"dynamicMetadata":{"clientId":false,"useNLMeta":true,"clientSecret":false,"botId":false,"from.id":true,"webhookURL":false},"useLexBotDropdown":true,"useDynamic":true,"conditionMetadata":[{"id":"352f3649-073d-4cdd-b107-aab42e5ae26d","operator":{"name":"Equals","value":"Equals","shortDisplay":"="},"value":"SpeakToAgent"}]},"6961a0b1-3cc8-46b8-9bf8-3150c79e61a9":{"position":{"x":-56.8,"y":256}},"97b082d3-db3f-4eb8-863f-a2adc143083a":{"position":{"x":408.8,"y":-69.6}},"6ad32c22-8e83-4c71-a4fd-396efe963417":{"position":{"x":200.8,"y":398.4},"overrideConsoleVoice":true},"8f16436a-a326-4082-8df2-49390dc2f9c9":{"position":{"x":162.4,"y":-54.4}}},"Annotations":[],"name":"TalkingToLexAndAgentTransfer","description":"A Sample contactflow to interact with lex bot","type":"contactFlow","status":"published","hash":{}},"Actions":[{"Parameters":{"MediaStreamingState":"Enabled","MediaStreamType":"Audio","Participants":[{"ParticipantType":"Customer","MediaDirections":["To","From"]}]},"Identifier":"streaming","Type":"UpdateContactMediaStreamingBehavior","Transitions":{"NextAction":"6961a0b1-3cc8-46b8-9bf8-3150c79e61a9","Errors":[{"NextAction":"67dda135-2090-4b0c-bf32-dcaa4a61e8fe","ErrorType":"NoMatchingError"}]}},{"Parameters":{"Text":"error executing lambda function"},"Identifier":"67dda135-2090-4b0c-bf32-dcaa4a61e8fe","Type":"MessageParticipant","Transitions":{"NextAction":"c696c183-6a04-4889-bc42-9a64d80bc0fe"}},{"Parameters":{"ContactFlowId":"arn:aws:connect:us-east-1:274863560648:instance/d64bf7b0-697e-4500-a890-e4f1747c829f/contact-flow/8b0e8cdb-ccbf-4d90-ab7c-4ba07e020a18"},"Identifier":"a88c4128-6412-4b36-bdd0-268a800e24a4","Type":"TransferToFlow","Transitions":{"NextAction":"c696c183-6a04-4889-bc42-9a64d80bc0fe","Errors":[{"NextAction":"c696c183-6a04-4889-bc42-9a64d80bc0fe","ErrorType":"NoMatchingError"}]}},{"Parameters":{},"Identifier":"c696c183-6a04-4889-bc42-9a64d80bc0fe","Type":"DisconnectParticipant","Transitions":{}},{"Parameters":{"LambdaFunctionARN":"arn:aws:lambda:us-east-1:274863560648:function:InvokeFromConnectToLex","InvocationTimeLimitSeconds":"5","LambdaInvocationAttributes":{"contactno":"$.SystemEndpoint.Address","clientId":"$.FlowAttributes.clientId","clientSecret":"$.FlowAttributes.clientSecret","botId":"$.FlowAttributes.botId","webhookURL":"$.FlowAttributes.webhookURL"},"ResponseValidation":{"ResponseType":"STRING_MAP"}},"Identifier":"65910ab9-1679-4917-926a-332331872464","Type":"InvokeLambdaFunction","Transitions":{"NextAction":"db72e8aa-77a0-4d6f-9f1f-98c8628811d1","Errors":[{"NextAction":"67dda135-2090-4b0c-bf32-dcaa4a61e8fe","ErrorType":"NoMatchingError"}]}},{"Parameters":{"Text":"$.External.welcomemsg","LexBot":{"Name":"LexBotForAmazonConnect","Region":"us-east-1","Alias":"citiamazonconnect"},"LexSessionAttributes":{"clientId":"$.FlowAttributes.clientId","useNLMeta":"$.External.useNLMeta","clientSecret":"$.FlowAttributes.clientSecret","botId":"$.FlowAttributes.botId","from.id":"$.External.identity","webhookURL":"$.FlowAttributes.webhookURL"}},"Identifier":"db72e8aa-77a0-4d6f-9f1f-98c8628811d1","Type":"ConnectParticipantWithLexBot","Transitions":{"NextAction":"c696c183-6a04-4889-bc42-9a64d80bc0fe","Conditions":[{"NextAction":"a88c4128-6412-4b36-bdd0-268a800e24a4","Condition":{"Operator":"Equals","Operands":["SpeakToAgent"]}}],"Errors":[{"NextAction":"c696c183-6a04-4889-bc42-9a64d80bc0fe","ErrorType":"NoMatchingCondition"},{"NextAction":"c696c183-6a04-4889-bc42-9a64d80bc0fe","ErrorType":"NoMatchingError"}]}},{"Parameters":{"FlowLoggingBehavior":"Enabled"},"Identifier":"6961a0b1-3cc8-46b8-9bf8-3150c79e61a9","Type":"UpdateFlowLoggingBehavior","Transitions":{"NextAction":"8f16436a-a326-4082-8df2-49390dc2f9c9"}},{"Parameters":{"Text":"Error Setting Bot Credentials"},"Identifier":"97b082d3-db3f-4eb8-863f-a2adc143083a","Type":"MessageParticipant","Transitions":{"NextAction":"c696c183-6a04-4889-bc42-9a64d80bc0fe","Errors":[{"NextAction":"c696c183-6a04-4889-bc42-9a64d80bc0fe","ErrorType":"NoMatchingError"}]}},{"Parameters":{"TextToSpeechEngine":"Neural","TextToSpeechStyle":"None","TextToSpeechVoice":"Ruth"},"Identifier":"6ad32c22-8e83-4c71-a4fd-396efe963417","Type":"UpdateContactTextToSpeechVoice","Transitions":{"NextAction":"65910ab9-1679-4917-926a-332331872464"}},{"Parameters":{"FlowAttributes":{"botId":{"Value":"st-c44385de-53e1-51db-869b-64c3fab8e37c"},"clientId":{"Value":"cs-d332fe14-a23c-58b8-9fec-388ce84536e2"},"clientSecret":{"Value":"HCzV7Et9Vd6p1nFB0Ta//Qeu32BTMss1gzA3kvGNIuE="},"webhookURL":{"Value":"https://bots.kore.ai/chatbot/hooks/st-c44385de-53e1-51db-869b-64c3fab8e37c/hookInstance/ivrInst-f09a25da-6fc6-51b1-913d-0c19b5cbad74"}}},"Identifier":"8f16436a-a326-4082-8df2-49390dc2f9c9","Type":"UpdateFlowAttributes","Transitions":{"NextAction":"6ad32c22-8e83-4c71-a4fd-396efe963417","Errors":[{"NextAction":"97b082d3-db3f-4eb8-863f-a2adc143083a","ErrorType":"NoMatchingError"}]}}]}
+{
+    "Version": "2019-10-30",
+    "StartAction": "streaming",
+    "Metadata": {
+        "entryPointPosition": {
+            "x": -148,
+            "y": 11.2
+        },
+        "ActionMetadata": {
+            "streaming": {
+                "position": {
+                    "x": -62.4,
+                    "y": -19.2
+                },
+                "isFriendlyName": true,
+                "toCustomer": true,
+                "fromCustomer": true
+            },
+            "67dda135-2090-4b0c-bf32-dcaa4a61e8fe": {
+                "position": {
+                    "x": 656.8,
+                    "y": 376
+                }
+            },
+            "a88c4128-6412-4b36-bdd0-268a800e24a4": {
+                "position": {
+                    "x": 987.2,
+                    "y": -72.8
+                },
+                "parameters": {
+                    "ContactFlowId": {
+                        "displayName": "KVSAgentAssist"
+                    }
+                },
+                "ContactFlow": {
+                    "text": "KVSAgentAssist"
+                }
+            },
+            "c696c183-6a04-4889-bc42-9a64d80bc0fe": {
+                "position": {
+                    "x": 990.4,
+                    "y": 229.6
+                }
+            },
+            "65910ab9-1679-4917-926a-332331872464": {
+                "position": {
+                    "x": 387.2,
+                    "y": 180.8
+                },
+                "parameters": {
+                    "LambdaFunctionARN": {
+                        "displayName": "InvokeFromConnectToLex"
+                    },
+                    "LambdaInvocationAttributes": {
+                        "contactno": {
+                            "useDynamic": true
+                        },
+                        "clientId": {
+                            "useDynamic": true
+                        },
+                        "clientSecret": {
+                            "useDynamic": true
+                        },
+                        "botId": {
+                            "useDynamic": true
+                        },
+                        "webhookURL": {
+                            "useDynamic": true
+                        }
+                    }
+                },
+                "dynamicMetadata": {
+                    "contactno": true,
+                    "clientId": true,
+                    "clientSecret": true,
+                    "botId": true,
+                    "webhookURL": true
+                }
+            },
+            "db72e8aa-77a0-4d6f-9f1f-98c8628811d1": {
+                "position": {
+                    "x": 644,
+                    "y": -16
+                },
+                "parameters": {
+                    "Text": {
+                        "useDynamic": true
+                    },
+                    "LexSessionAttributes": {
+                        "useNLMeta": {
+                            "useDynamic": true
+                        },
+                        "from.id": {
+                            "useDynamic": true
+                        }
+                    }
+                },
+                "dynamicMetadata": {
+                    "clientId": false,
+                    "useNLMeta": true,
+                    "clientSecret": false,
+                    "botId": false,
+                    "from.id": true,
+                    "webhookURL": false
+                },
+                "useLexBotDropdown": true,
+                "useDynamic": true,
+                "conditionMetadata": [
+                    {
+                        "id": "352f3649-073d-4cdd-b107-aab42e5ae26d",
+                        "operator": {
+                            "name": "Equals",
+                            "value": "Equals",
+                            "shortDisplay": "="
+                        },
+                        "value": "SpeakToAgent"
+                    }
+                ]
+            },
+            "6961a0b1-3cc8-46b8-9bf8-3150c79e61a9": {
+                "position": {
+                    "x": -56.8,
+                    "y": 256
+                }
+            },
+            "97b082d3-db3f-4eb8-863f-a2adc143083a": {
+                "position": {
+                    "x": 408.8,
+                    "y": -69.6
+                }
+            },
+            "6ad32c22-8e83-4c71-a4fd-396efe963417": {
+                "position": {
+                    "x": 200.8,
+                    "y": 398.4
+                },
+                "overrideConsoleVoice": true
+            },
+            "8f16436a-a326-4082-8df2-49390dc2f9c9": {
+                "position": {
+                    "x": 162.4,
+                    "y": -54.4
+                }
+            }
+        },
+        "Annotations": [],
+        "name": "TalkingToLexAndAgentTransfer",
+        "description": "A Sample contactflow to interact with lex bot",
+        "type": "contactFlow",
+        "status": "published",
+        "hash": {}
+    },
+    "Actions": [
+        {
+            "Parameters": {
+                "MediaStreamingState": "Enabled",
+                "MediaStreamType": "Audio",
+                "Participants": [
+                    {
+                        "ParticipantType": "Customer",
+                        "MediaDirections": [
+                            "To",
+                            "From"
+                        ]
+                    }
+                ]
+            },
+            "Identifier": "streaming",
+            "Type": "UpdateContactMediaStreamingBehavior",
+            "Transitions": {
+                "NextAction": "6961a0b1-3cc8-46b8-9bf8-3150c79e61a9",
+                "Errors": [
+                    {
+                        "NextAction": "67dda135-2090-4b0c-bf32-dcaa4a61e8fe",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {
+                "Text": "error executing lambda function"
+            },
+            "Identifier": "67dda135-2090-4b0c-bf32-dcaa4a61e8fe",
+            "Type": "MessageParticipant",
+            "Transitions": {
+                "NextAction": "c696c183-6a04-4889-bc42-9a64d80bc0fe"
+            }
+        },
+        {
+            "Parameters": {
+                "ContactFlowId": "arn:aws:connect:us-east-1:274863560648:instance/d64bf7b0-697e-4500-a890-e4f1747c829f/contact-flow/8b0e8cdb-ccbf-4d90-ab7c-4ba07e020a18"
+            },
+            "Identifier": "a88c4128-6412-4b36-bdd0-268a800e24a4",
+            "Type": "TransferToFlow",
+            "Transitions": {
+                "NextAction": "c696c183-6a04-4889-bc42-9a64d80bc0fe",
+                "Errors": [
+                    {
+                        "NextAction": "c696c183-6a04-4889-bc42-9a64d80bc0fe",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {},
+            "Identifier": "c696c183-6a04-4889-bc42-9a64d80bc0fe",
+            "Type": "DisconnectParticipant",
+            "Transitions": {}
+        },
+        {
+            "Parameters": {
+                "LambdaFunctionARN": "arn:aws:lambda:us-east-1:274863560648:function:InvokeFromConnectToLex",
+                "InvocationTimeLimitSeconds": "5",
+                "LambdaInvocationAttributes": {
+                    "contactno": "$.SystemEndpoint.Address",
+                    "clientId": "$.FlowAttributes.clientId",
+                    "clientSecret": "$.FlowAttributes.clientSecret",
+                    "botId": "$.FlowAttributes.botId",
+                    "webhookURL": "$.FlowAttributes.webhookURL"
+                },
+                "ResponseValidation": {
+                    "ResponseType": "STRING_MAP"
+                }
+            },
+            "Identifier": "65910ab9-1679-4917-926a-332331872464",
+            "Type": "InvokeLambdaFunction",
+            "Transitions": {
+                "NextAction": "db72e8aa-77a0-4d6f-9f1f-98c8628811d1",
+                "Errors": [
+                    {
+                        "NextAction": "67dda135-2090-4b0c-bf32-dcaa4a61e8fe",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {
+                "Text": "$.External.welcomemsg",
+                "LexBot": {
+                    "Name": "LexBotForAmazonConnect",
+                    "Region": "us-east-1",
+                    "Alias": "citiamazonconnect"
+                },
+                "LexSessionAttributes": {
+                    "clientId": "$.FlowAttributes.clientId",
+                    "useNLMeta": "$.External.useNLMeta",
+                    "clientSecret": "$.FlowAttributes.clientSecret",
+                    "botId": "$.FlowAttributes.botId",
+                    "from.id": "$.External.identity",
+                    "webhookURL": "$.FlowAttributes.webhookURL"
+                }
+            },
+            "Identifier": "db72e8aa-77a0-4d6f-9f1f-98c8628811d1",
+            "Type": "ConnectParticipantWithLexBot",
+            "Transitions": {
+                "NextAction": "c696c183-6a04-4889-bc42-9a64d80bc0fe",
+                "Conditions": [
+                    {
+                        "NextAction": "a88c4128-6412-4b36-bdd0-268a800e24a4",
+                        "Condition": {
+                            "Operator": "Equals",
+                            "Operands": [
+                                "SpeakToAgent"
+                            ]
+                        }
+                    }
+                ],
+                "Errors": [
+                    {
+                        "NextAction": "c696c183-6a04-4889-bc42-9a64d80bc0fe",
+                        "ErrorType": "NoMatchingCondition"
+                    },
+                    {
+                        "NextAction": "c696c183-6a04-4889-bc42-9a64d80bc0fe",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {
+                "FlowLoggingBehavior": "Enabled"
+            },
+            "Identifier": "6961a0b1-3cc8-46b8-9bf8-3150c79e61a9",
+            "Type": "UpdateFlowLoggingBehavior",
+            "Transitions": {
+                "NextAction": "8f16436a-a326-4082-8df2-49390dc2f9c9"
+            }
+        },
+        {
+            "Parameters": {
+                "Text": "Error Setting Bot Credentials"
+            },
+            "Identifier": "97b082d3-db3f-4eb8-863f-a2adc143083a",
+            "Type": "MessageParticipant",
+            "Transitions": {
+                "NextAction": "c696c183-6a04-4889-bc42-9a64d80bc0fe",
+                "Errors": [
+                    {
+                        "NextAction": "c696c183-6a04-4889-bc42-9a64d80bc0fe",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        {
+            "Parameters": {
+                "TextToSpeechEngine": "Neural",
+                "TextToSpeechStyle": "None",
+                "TextToSpeechVoice": "Ruth"
+            },
+            "Identifier": "6ad32c22-8e83-4c71-a4fd-396efe963417",
+            "Type": "UpdateContactTextToSpeechVoice",
+            "Transitions": {
+                "NextAction": "65910ab9-1679-4917-926a-332331872464"
+            }
+        },
+        {
+            "Parameters": {
+                "FlowAttributes": {
+                    "botId": {
+                        "Value": "<Bot ID>"
+                    },
+                    "clientId": {
+                        "Value": "<Client ID>"
+                    },
+                    "clientSecret": {
+                        "Value": "<Client Secret>"
+                    },
+                    "webhookURL": {
+                        "Value": "<Webhook URL from Bots Platform>"
+                    }
+                }
+            },
+            "Identifier": "8f16436a-a326-4082-8df2-49390dc2f9c9",
+            "Type": "UpdateFlowAttributes",
+            "Transitions": {
+                "NextAction": "6ad32c22-8e83-4c71-a4fd-396efe963417",
+                "Errors": [
+                    {
+                        "NextAction": "97b082d3-db3f-4eb8-863f-a2adc143083a",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        }
+    ]
+}
