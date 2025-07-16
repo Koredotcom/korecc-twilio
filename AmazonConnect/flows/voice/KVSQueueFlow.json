@@ -1,0 +1,117 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "c561b8bb-c258-46b0-886f-da72f6acc567",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 50,
+      "y": 50
+    },
+    "ActionMetadata": {
+      "ec22894b-513e-4fa6-8643-7a545b045216": {
+        "position": {
+          "x": 588,
+          "y": 279
+        },
+        "parameters": {
+          "EventHooks": {
+            "DisconnectAgentUI": {
+              "displayName": "Disposition Flow"
+            }
+          }
+        }
+      },
+      "c561b8bb-c258-46b0-886f-da72f6acc567": {
+        "position": {
+          "x": 276,
+          "y": 29
+        },
+        "parameters": {
+          "QueueId": {
+            "displayName": "BasicQueue"
+          }
+        },
+        "queue": {
+          "text": "BasicQueue"
+        }
+      },
+      "06ffce3e-77e0-42c7-b872-8fa73b820cf5": {
+        "position": {
+          "x": 877,
+          "y": 283
+        }
+      },
+      "f8cb2217-5e95-4ca4-a2d1-1cfdc3e02dce": {
+        "position": {
+          "x": 1323,
+          "y": 289
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "KVSQueueFlow",
+    "description": "",
+    "type": "contactFlow",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "EventHooks": {
+          "DisconnectAgentUI": "arn:aws:connect:us-east-1:274863560648:instance/fe8247cb-6a64-4057-b8c9-5cc56e8c93ba/contact-flow/2bc558e5-2f66-44c5-8985-adb684919006"
+        }
+      },
+      "Identifier": "ec22894b-513e-4fa6-8643-7a545b045216",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "06ffce3e-77e0-42c7-b872-8fa73b820cf5",
+        "Errors": [
+          {
+            "NextAction": "06ffce3e-77e0-42c7-b872-8fa73b820cf5",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:274863560648:instance/fe8247cb-6a64-4057-b8c9-5cc56e8c93ba/queue/dda3235a-e2c6-4bee-8865-fc522452fcb3"
+      },
+      "Identifier": "c561b8bb-c258-46b0-886f-da72f6acc567",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "ec22894b-513e-4fa6-8643-7a545b045216",
+        "Errors": [
+          {
+            "NextAction": "f8cb2217-5e95-4ca4-a2d1-1cfdc3e02dce",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "06ffce3e-77e0-42c7-b872-8fa73b820cf5",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "f8cb2217-5e95-4ca4-a2d1-1cfdc3e02dce",
+        "Errors": [
+          {
+            "NextAction": "f8cb2217-5e95-4ca4-a2d1-1cfdc3e02dce",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "f8cb2217-5e95-4ca4-a2d1-1cfdc3e02dce",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "f8cb2217-5e95-4ca4-a2d1-1cfdc3e02dce",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    }
+  ]
+}
