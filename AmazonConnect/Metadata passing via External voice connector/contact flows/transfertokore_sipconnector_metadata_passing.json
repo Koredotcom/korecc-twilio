@@ -1,0 +1,338 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "ed5854ab-703b-4aab-bbac-3eb14609eeec",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -316,
+      "y": -60
+    },
+    "ActionMetadata": {
+      "ed5854ab-703b-4aab-bbac-3eb14609eeec": {
+        "position": {
+          "x": -183.2,
+          "y": 225.6
+        }
+      },
+      "4351d51d-23b0-42ad-a872-d4ba5ef79c72": {
+        "position": {
+          "x": 122.4,
+          "y": 216
+        }
+      },
+      "c6cb880c-5932-4899-805c-2dde1edf3264": {
+        "position": {
+          "x": 1616,
+          "y": -342.4
+        },
+        "parameters": {
+          "QueueId": {
+            "displayName": "BasicQueue"
+          }
+        },
+        "queue": {
+          "text": "BasicQueue"
+        }
+      },
+      "b6e76be6-391d-4d44-bbe6-5cf0a6507624": {
+        "position": {
+          "x": 1945.6,
+          "y": -398.4
+        }
+      },
+      "be28f2a9-f31d-46ff-a430-e02177309a14": {
+        "position": {
+          "x": 1188,
+          "y": -12.8
+        }
+      },
+      "d1f6af0b-c4a7-4147-b0e4-6b22a4af8d92": {
+        "position": {
+          "x": 816,
+          "y": 76
+        }
+      },
+      "7592c1bb-b329-4279-bf95-752edc917be0": {
+        "position": {
+          "x": 2273.6,
+          "y": 320
+        }
+      },
+      "78ca1090-7c27-4451-9758-87a3c56fade4": {
+        "position": {
+          "x": 599.2,
+          "y": 178.4
+        }
+      },
+      "0887be0d-3fbf-4b0e-9c52-8ca62d76f359": {
+        "position": {
+          "x": 1390.4,
+          "y": -138.4
+        }
+      },
+      "acc4a95e-b38a-40c4-9530-46700662cf55": {
+        "position": {
+          "x": 1306.4,
+          "y": -392.8
+        },
+        "parameters": {
+          "Attributes": {
+            "customData": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicParams": [
+          "customData"
+        ]
+      },
+      "b985e076-0328-44e5-bb79-bd7655d7d53f": {
+        "position": {
+          "x": 364.8,
+          "y": -213.6
+        },
+        "parameters": {
+          "VoiceConnector": {
+            "VoiceConnectorArn": {
+              "displayName": "koreVoiceConnector"
+            },
+            "FromUser": {
+              "useDynamic": true
+            }
+          }
+        },
+        "useDynamicFromUser": true
+      },
+      "b0eed1d5-0492-4c02-8008-72c4d61943f2": {
+        "position": {
+          "x": 968,
+          "y": -252.8
+        },
+        "parameters": {
+          "LambdaFunctionARN": {
+            "displayName": "koreRetrieveSessionMetadata"
+          },
+          "LambdaInvocationAttributes": {
+            "contactId": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "contactId": true
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "Kore voice automation with External Voice connector + metadata passing",
+    "description": "",
+    "type": "contactFlow",
+    "status": "SAVED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Enabled"
+      },
+      "Identifier": "ed5854ab-703b-4aab-bbac-3eb14609eeec",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "4351d51d-23b0-42ad-a872-d4ba5ef79c72"
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "Welcome to Amazon connect SIP flow"
+      },
+      "Identifier": "4351d51d-23b0-42ad-a872-d4ba5ef79c72",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "b985e076-0328-44e5-bb79-bd7655d7d53f",
+        "Errors": [
+          {
+            "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:274863560648:instance/fe8247cb-6a64-4057-b8c9-5cc56e8c93ba/queue/dda3235a-e2c6-4bee-8865-fc522452fcb3"
+      },
+      "Identifier": "c6cb880c-5932-4899-805c-2dde1edf3264",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "b6e76be6-391d-4d44-bbe6-5cf0a6507624",
+        "Errors": [
+          {
+            "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "b6e76be6-391d-4d44-bbe6-5cf0a6507624",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+        "Errors": [
+          {
+            "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "There is some issue while calling external voice system. The call failed."
+      },
+      "Identifier": "be28f2a9-f31d-46ff-a430-e02177309a14",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+        "Errors": [
+          {
+            "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "The request to external voice system is getting timed out."
+      },
+      "Identifier": "d1f6af0b-c4a7-4147-b0e4-6b22a4af8d92",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+        "Errors": [
+          {
+            "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "7592c1bb-b329-4279-bf95-752edc917be0",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Text": "There is some error while calling external voice system. Check the cloudwatch logs for more details"
+      },
+      "Identifier": "78ca1090-7c27-4451-9758-87a3c56fade4",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+        "Errors": [
+          {
+            "NextAction": "7592c1bb-b329-4279-bf95-752edc917be0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "There is some error while fetching the kore session data from DynamoDB."
+      },
+      "Identifier": "0887be0d-3fbf-4b0e-9c52-8ca62d76f359",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "c6cb880c-5932-4899-805c-2dde1edf3264",
+        "Errors": [
+          {
+            "NextAction": "c6cb880c-5932-4899-805c-2dde1edf3264",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customData": "$.External.body"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "acc4a95e-b38a-40c4-9530-46700662cf55",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "c6cb880c-5932-4899-805c-2dde1edf3264",
+        "Errors": [
+          {
+            "NextAction": "c6cb880c-5932-4899-805c-2dde1edf3264",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ThirdPartyConnectionTimeLimitSeconds": "60",
+        "ContinueFlowExecution": "True",
+        "VoiceConnector": {
+          "VoiceConnectorType": "CallTransferConnector",
+          "VoiceConnectorArn": "arn:aws:chime:us-east-1:274863560648:vc/daxr840zmmndqkhqechuca",
+          "ToUser": "+12065551118",
+          "FromUser": "$.CustomerEndpoint.Address"
+        }
+      },
+      "Identifier": "b985e076-0328-44e5-bb79-bd7655d7d53f",
+      "Type": "TransferParticipantToThirdParty",
+      "Transitions": {
+        "NextAction": "b0eed1d5-0492-4c02-8008-72c4d61943f2",
+        "Errors": [
+          {
+            "NextAction": "be28f2a9-f31d-46ff-a430-e02177309a14",
+            "ErrorType": "CallFailed"
+          },
+          {
+            "NextAction": "d1f6af0b-c4a7-4147-b0e4-6b22a4af8d92",
+            "ErrorType": "ConnectionTimeLimitExceeded"
+          },
+          {
+            "NextAction": "78ca1090-7c27-4451-9758-87a3c56fade4",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "arn:aws:lambda:us-east-1:274863560648:function:koreRetrieveSessionMetadata",
+        "InvocationTimeLimitSeconds": "3",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "contactId": "$.ContactId"
+        },
+        "ResponseValidation": {
+          "ResponseType": "JSON"
+        }
+      },
+      "Identifier": "b0eed1d5-0492-4c02-8008-72c4d61943f2",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "acc4a95e-b38a-40c4-9530-46700662cf55",
+        "Errors": [
+          {
+            "NextAction": "0887be0d-3fbf-4b0e-9c52-8ca62d76f359",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
