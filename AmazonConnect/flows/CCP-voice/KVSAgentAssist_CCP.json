@@ -1,0 +1,305 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "856dd865-e5a0-49c6-aacc-55fe53c38a22",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -620,
+      "y": 17.6
+    },
+    "ActionMetadata": {
+      "856dd865-e5a0-49c6-aacc-55fe53c38a22": {
+        "position": {
+          "x": -484.8,
+          "y": -1.6
+        }
+      },
+      "99458f47-6941-48ce-9b90-fdf184759b22": {
+        "position": {
+          "x": 1344,
+          "y": 187.2
+        }
+      },
+      "0ac2523b-be01-42ed-8e31-591228338d56": {
+        "position": {
+          "x": -219.2,
+          "y": -10.4
+        },
+        "parameters": {
+          "TextToSpeechVoice": {
+            "languageCode": "en-US"
+          }
+        },
+        "overrideConsoleVoice": true
+      },
+      "410057d0-9390-486b-bbb4-c4def2a7367c": {
+        "position": {
+          "x": 260.8,
+          "y": 263.2
+        }
+      },
+      "6728609a-9707-41f7-a87c-30ac1fde4f4c": {
+        "position": {
+          "x": 22.4,
+          "y": 4
+        },
+        "toCustomer": true,
+        "fromCustomer": true
+      },
+      "3f9659a3-56a5-4f3c-a431-fd9da2306459": {
+        "position": {
+          "x": 767.2,
+          "y": 146.4
+        }
+      },
+      "e7825b58-a9db-4935-9f83-e67a564176e8": {
+        "position": {
+          "x": 288.8,
+          "y": -125.6
+        },
+        "dynamicParams": []
+      },
+      "28cdee97-d2fe-4b16-8b72-dce8c1f56588": {
+        "position": {
+          "x": 1088.8,
+          "y": 100
+        },
+        "parameters": {
+          "EventHooks": {
+            "DisconnectAgentUI": {
+              "displayName": "Disposition Flow"
+            }
+          }
+        }
+      },
+      "Start Stream and Transcription in Kore": {
+        "position": {
+          "x": 536.8,
+          "y": -40.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "displayName": "ivr-recording1-kvsConsumerTrigger-QobdOak6th4V"
+          },
+          "LambdaInvocationAttributes": {
+            "botId": {
+              "useDynamic": true
+            },
+            "clientId": {
+              "useDynamic": true
+            },
+            "clientSecret": {
+              "useDynamic": true
+            },
+            "agentassistUrl": {
+              "useDynamic": true
+            },
+            "wssUrl": {
+              "useDynamic": true
+            },
+            "sipUri": {
+              "useDynamic": true
+            },
+            "accountId": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "botId": true,
+          "clientId": true,
+          "clientSecret": true,
+          "agentassistUrl": true,
+          "wssUrl": true,
+          "sipUri": true,
+          "accountId": true
+        }
+      },
+      "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6": {
+        "position": {
+          "x": 792.8,
+          "y": -56.8
+        },
+        "parameters": {
+          "ContactFlowId": {
+            "displayName": "KVSQueueFlow"
+          }
+        },
+        "ContactFlow": {
+          "text": "KVSQueueFlow"
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "KVSAgentAssist_CCP",
+    "description": "For AgentAssist voice integration purpose for CCP approach",
+    "type": "contactFlow",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Enabled"
+      },
+      "Identifier": "856dd865-e5a0-49c6-aacc-55fe53c38a22",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "0ac2523b-be01-42ed-8e31-591228338d56"
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "99458f47-6941-48ce-9b90-fdf184759b22",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "TextToSpeechEngine": "Neural",
+        "TextToSpeechStyle": "None",
+        "TextToSpeechVoice": "Ruth"
+      },
+      "Identifier": "0ac2523b-be01-42ed-8e31-591228338d56",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "6728609a-9707-41f7-a87c-30ac1fde4f4c"
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "An error occurred when we tried to start streaming."
+      },
+      "Identifier": "410057d0-9390-486b-bbb4-c4def2a7367c",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "28cdee97-d2fe-4b16-8b72-dce8c1f56588"
+      }
+    },
+    {
+      "Parameters": {
+        "MediaStreamingState": "Enabled",
+        "MediaStreamType": "Audio",
+        "Participants": [
+          {
+            "ParticipantType": "Customer",
+            "MediaDirections": [
+              "To",
+              "From"
+            ]
+          }
+        ]
+      },
+      "Identifier": "6728609a-9707-41f7-a87c-30ac1fde4f4c",
+      "Type": "UpdateContactMediaStreamingBehavior",
+      "Transitions": {
+        "NextAction": "e7825b58-a9db-4935-9f83-e67a564176e8",
+        "Errors": [
+          {
+            "NextAction": "410057d0-9390-486b-bbb4-c4def2a7367c",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "An error occurred with the KVS trigger lambda function."
+      },
+      "Identifier": "3f9659a3-56a5-4f3c-a431-fd9da2306459",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "28cdee97-d2fe-4b16-8b72-dce8c1f56588"
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "botId": "st-xxxxx6b-99c9-5165-af54-xxxx",
+          "clientId": "cs-xxx-4d51-50cd-8f18-xxxx",
+          "clientSecret": "XXXXXXXKB3Zv7S3XXXXXX/JKfJwPHvFgq4oqA=",
+          "agentassistUrl": "https://platform.kore.ai/koreagentassist-sdk-v3/UI/agentassist-iframe.html",
+          "languageCode": "en",
+          "wssUrl": "wss://savg-webserver.kore.ai",
+          "sipUri": "sip:XXXX@savg-us-prod-sbc-in-nlb-0d9a4c651955ff47.elb.us-east-1.amazonaws.com",
+          "accountId": "65fa7cd90fe440b013xxxxxx"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "e7825b58-a9db-4935-9f83-e67a564176e8",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Start Stream and Transcription in Kore",
+        "Errors": [
+          {
+            "NextAction": "Start Stream and Transcription in Kore",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "DisconnectAgentUI": "arn:aws:connect:us-east-1:274863560648:instance/fe8247cb-6a64-4057-b8c9-5cc56e8c93ba/contact-flow/2bc558e5-2f66-44c5-8985-adb684919006"
+        }
+      },
+      "Identifier": "28cdee97-d2fe-4b16-8b72-dce8c1f56588",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "99458f47-6941-48ce-9b90-fdf184759b22",
+        "Errors": [
+          {
+            "NextAction": "99458f47-6941-48ce-9b90-fdf184759b22",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "arn:aws:lambda:us-east-1:274863560648:function:ivr-recording1-kvsConsumerTrigger-QobdOak6th4V",
+        "InvocationTimeLimitSeconds": "8",
+        "LambdaInvocationAttributes": {
+          "botId": "$.Attributes.botId",
+          "clientId": "$.Attributes.clientId",
+          "clientSecret": "$.Attributes.clientSecret",
+          "agentassistUrl": "$.Attributes.agentassistUrl",
+          "wssUrl": "$.Attributes.wssUrl",
+          "sipUri": "$.Attributes.sipUri",
+          "accountId": "$.Attributes.accountId"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "Start Stream and Transcription in Kore",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6",
+        "Errors": [
+          {
+            "NextAction": "3f9659a3-56a5-4f3c-a431-fd9da2306459",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ContactFlowId": "arn:aws:connect:us-east-1:274863560648:instance/fe8247cb-6a64-4057-b8c9-5cc56e8c93ba/contact-flow/d07184a9-319f-4ab2-8a8e-e526895ab919"
+      },
+      "Identifier": "1089ed3e-fd4e-40de-a7ba-33fa84cc20b6",
+      "Type": "TransferToFlow",
+      "Transitions": {
+        "NextAction": "28cdee97-d2fe-4b16-8b72-dce8c1f56588",
+        "Errors": [
+          {
+            "NextAction": "28cdee97-d2fe-4b16-8b72-dce8c1f56588",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
